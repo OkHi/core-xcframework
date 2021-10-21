@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.31.1 clang-1300.0.29.1)
-// swift-module-flags: -target arm64-apple-ios12.1-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name OkCore
+// swift-module-flags: -target arm64-apple-ios12.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name OkCore
 import SystemConfiguration.CaptiveNetwork
 import CoreLocation
 import CoreTelephony
@@ -167,6 +167,12 @@ extension UIKit.UIDevice {
     get
   }
   public var clientKey: Swift.String? {
+    get
+  }
+  public var environment: OkCore.Environment? {
+    get
+  }
+  public var appContext: OkCore.OkHiAppContext? {
     get
   }
   @objc deinit
