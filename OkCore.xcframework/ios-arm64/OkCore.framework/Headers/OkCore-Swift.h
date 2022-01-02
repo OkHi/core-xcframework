@@ -348,38 +348,6 @@ SWIFT_PROTOCOL("_TtP6OkCore27OkHiLocationServiceDelegate_")
 @end
 
 
-/// Defines OkHiUser class of the user object requried by OkHi services and libraries
-SWIFT_CLASS("_TtC6OkCore8OkHiUser")
-@interface OkHiUser : NSObject
-/// The user’s phone number. Must be MSISDN standard format. e.g +254712345678
-@property (nonatomic, copy) NSString * _Nonnull phone;
-/// The user’s first name
-@property (nonatomic, copy) NSString * _Nullable firstName;
-/// The user’s last name
-@property (nonatomic, copy) NSString * _Nullable lastName;
-/// The OkHi’s userId. Usually obtained after a user successfully creates an OkHi address
-@property (nonatomic, copy) NSString * _Nullable id;
-/// Initalizes OkHiUser class
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-/// Initalizes OkHiUser class
-/// \param phoneNumber user’s phone number
-///
-- (nonnull instancetype)initWithPhoneNumber:(NSString * _Nonnull)phoneNumber OBJC_DESIGNATED_INITIALIZER;
-/// Initalizes OkHiUser class
-/// \param firstName user’s first name
-///
-- (OkHiUser * _Nonnull)withFirstName:(NSString * _Nonnull)firstName SWIFT_WARN_UNUSED_RESULT;
-/// Initalizes OkHiUser class
-/// \param lastName user’s last name
-///
-- (OkHiUser * _Nonnull)withLastName:(NSString * _Nonnull)lastName SWIFT_WARN_UNUSED_RESULT;
-/// Initalizes OkHiUser class
-/// \param okHiId user’s OkHi id
-///
-- (OkHiUser * _Nonnull)withOkHiId:(NSString * _Nonnull)okHiId SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
 SWIFT_CLASS("_TtC6OkCore13OkPreferences")
 @interface OkPreferences : NSObject
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
