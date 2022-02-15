@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)
-// swift-module-flags: -target arm64-apple-ios12.1-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name OkCore
+// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.31.1 clang-1300.0.29.1)
+// swift-module-flags: -target arm64-apple-ios12.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name OkCore
 import SystemConfiguration.CaptiveNetwork
 import CoreLocation
 import CoreTelephony
@@ -10,34 +10,33 @@ import Network
 import Swift
 import SystemConfiguration
 import UIKit
-public class OkHiAppContext {
-  public var mode: Swift.String?
-  public var platform: Swift.String
-  public var developer: Swift.String
-  public var appMeta: OkCore.OkHiAppMeta?
-  public init()
-  public func withAppMeta(name: Swift.String, version: Swift.String, build: Swift.String) -> OkCore.OkHiAppContext
+import _Concurrency
+@_inheritsConvenienceInitializers @objc public class OkHiAppContext : ObjectiveC.NSObject {
+  @objc public var mode: Swift.String?
+  @objc public var platform: Swift.String
+  @objc public var developer: Swift.String
+  @objc public var appMeta: OkCore.OkHiAppMeta?
+  @objc override dynamic public init()
+  @objc public func withAppMeta(name: Swift.String, version: Swift.String, build: Swift.String) -> OkCore.OkHiAppContext
   @objc deinit
 }
-@_hasMissingDesignatedInitializers public class OkHiAppMeta {
-  public var name: Swift.String?
-  public var version: Swift.String?
-  public var build: Swift.String?
+@_hasMissingDesignatedInitializers @objc public class OkHiAppMeta : ObjectiveC.NSObject {
+  @objc public var name: Swift.String?
+  @objc public var version: Swift.String?
+  @objc public var build: Swift.String?
   @objc deinit
 }
-public class OkHiUser : Swift.Codable {
-  public var phone: Swift.String
-  public var firstName: Swift.String?
-  public var lastName: Swift.String?
-  public var id: Swift.String?
-  public init()
-  public init(phoneNumber: Swift.String)
-  public func with(firstName: Swift.String) -> OkCore.OkHiUser
-  public func with(lastName: Swift.String) -> OkCore.OkHiUser
-  public func with(okHiId: Swift.String) -> OkCore.OkHiUser
+@_inheritsConvenienceInitializers @objc public class OkHiUser : ObjectiveC.NSObject {
+  @objc public var phone: Swift.String
+  @objc public var firstName: Swift.String?
+  @objc public var lastName: Swift.String?
+  @objc public var id: Swift.String?
+  @objc override dynamic public init()
+  @objc public init(phoneNumber: Swift.String)
+  @objc public func with(firstName: Swift.String) -> OkCore.OkHiUser
+  @objc public func with(lastName: Swift.String) -> OkCore.OkHiUser
+  @objc public func with(okHiId: Swift.String) -> OkCore.OkHiUser
   @objc deinit
-  public func encode(to encoder: Swift.Encoder) throws
-  required public init(from decoder: Swift.Decoder) throws
 }
 public class OkHiLocation : Swift.Codable {
   public var id: Swift.String?
@@ -85,33 +84,33 @@ public struct OkHiGeofenceConfig : Swift.Codable {
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
-public enum LocationPermissionType {
+@objc public enum LocationPermissionType : Swift.Int {
   case whenInUse
   case always
-  public static func == (a: OkCore.LocationPermissionType, b: OkCore.LocationPermissionType) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
-  public var hashValue: Swift.Int {
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
     get
   }
 }
-public protocol OkHiLocationServiceDelegate : ObjectiveC.NSObject {
-  func okHiLocationService(locationService: OkCore.OkHiLocationService, didChangeLocationPermissionStatus locationPermissionType: OkCore.LocationPermissionType, result: Swift.Bool)
+@objc public protocol OkHiLocationServiceDelegate {
+  @objc func okHiLocationService(locationService: OkCore.OkHiLocationService, didChangeLocationPermissionStatus locationPermissionType: OkCore.LocationPermissionType, result: Swift.Bool)
 }
 @objc @_inheritsConvenienceInitializers public class OkHiLocationService : ObjectiveC.NSObject, CoreLocation.CLLocationManagerDelegate {
-  weak public var delegate: OkCore.OkHiLocationServiceDelegate?
+  @objc weak public var delegate: OkCore.OkHiLocationServiceDelegate?
   @objc override dynamic public init()
-  public func isLocationPermissionGranted() -> Swift.Bool
-  public func isLocationServicesAvailable() -> Swift.Bool
-  public func requestLocationPermission(withBackgroundLocationPermission: Swift.Bool = true)
+  @objc public func isLocationPermissionGranted() -> Swift.Bool
+  @objc public func isLocationServicesAvailable() -> Swift.Bool
+  @objc public func requestLocationPermission(withBackgroundLocationPermission: Swift.Bool = true)
   @objc public func locationManager(_ manager: CoreLocation.CLLocationManager, didChangeAuthorization status: CoreLocation.CLAuthorizationStatus)
   @objc deinit
 }
-public enum Environment {
+@objc public enum Environment : Swift.Int {
   case prod
   case sandbox
-  public static func == (a: OkCore.Environment, b: OkCore.Environment) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
-  public var hashValue: Swift.Int {
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
     get
   }
 }
@@ -126,8 +125,8 @@ public enum OkHiAccessScope : Swift.String {
     get
   }
 }
-extension UIDevice {
-  public static let modelName: Swift.String
+extension UIKit.UIDevice {
+  @_Concurrency.MainActor(unsafe) public static let modelName: Swift.String
 }
 @objc public class GeoPoint : ObjectiveC.NSObject, Foundation.NSSecureCoding, Swift.Codable {
   @objc public static var supportsSecureCoding: Swift.Bool
@@ -136,14 +135,13 @@ extension UIDevice {
   public init(lat: Swift.Double, lon: Swift.Double)
   @objc public func encode(with aCoder: Foundation.NSCoder)
   @objc required public init?(coder: Foundation.NSCoder)
-  @objc override dynamic public init()
   @objc deinit
   public func encode(to encoder: Swift.Encoder) throws
   required public init(from decoder: Swift.Decoder) throws
 }
-@objc @_inheritsConvenienceInitializers public class OkHiCore : ObjectiveC.NSObject {
+@_inheritsConvenienceInitializers @objc public class OkHiCore : ObjectiveC.NSObject {
   @objc override dynamic public init()
-  public init(okHiAuth: OkCore.OkHiAuth)
+  @objc public init(okHiAuth: OkCore.OkHiAuth)
   public func anonymousSignInWith(phoneNumber: Swift.String, in scopes: [Swift.String], completion: @escaping (Swift.Result<Swift.String, OkCore.OkHiError>) -> Swift.Void)
   public func anonymousSignInWith(userId: Swift.String, in scopes: [Swift.String], completion: @escaping (Swift.Result<Swift.String, OkCore.OkHiError>) -> Swift.Void)
   public func getConfiguration(authToken: Swift.String, completion: @escaping (Swift.Result<OkCore.OkHiGeofenceConfig, OkCore.OkHiError>) -> Swift.Void)
@@ -151,17 +149,17 @@ extension UIDevice {
   public func sendDeviceHealthInfo(accessToken: Swift.String, completion: @escaping (Swift.Result<Swift.Bool, OkCore.OkHiError>) -> Swift.Void)
   @objc deinit
 }
-@_hasMissingDesignatedInitializers public class OkHiAuth {
-  public var accessToken: Swift.String? {
-    get
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class OkHiAuth : ObjectiveC.NSObject {
+  @objc public var accessToken: Swift.String? {
+    @objc get
   }
   public var environment: OkCore.Environment?
-  final public let appContext: OkCore.OkHiAppContext
-  public init(branchId: Swift.String, clientKey: Swift.String, environment: OkCore.Environment, appContext: OkCore.OkHiAppContext? = nil)
+  @objc final public let appContext: OkCore.OkHiAppContext
+  @objc public init(branchId: Swift.String, clientKey: Swift.String, environment: OkCore.Environment, appContext: OkCore.OkHiAppContext? = nil)
   public init(branchId: Swift.String, clientKey: Swift.String, environment: Swift.String, appContext: OkCore.OkHiAppContext? = nil)
   @objc deinit
 }
-@_hasMissingDesignatedInitializers public class OkPreferences {
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class OkPreferences : ObjectiveC.NSObject {
   public static let shared: OkCore.OkPreferences
   public var branchId: Swift.String? {
     get
@@ -216,8 +214,10 @@ public class OkHiError : Swift.Error {
 }
 extension OkCore.LocationPermissionType : Swift.Equatable {}
 extension OkCore.LocationPermissionType : Swift.Hashable {}
+extension OkCore.LocationPermissionType : Swift.RawRepresentable {}
 extension OkCore.Environment : Swift.Equatable {}
 extension OkCore.Environment : Swift.Hashable {}
+extension OkCore.Environment : Swift.RawRepresentable {}
 extension OkCore.OkHiAccessScope : Swift.Equatable {}
 extension OkCore.OkHiAccessScope : Swift.Hashable {}
 extension OkCore.OkHiAccessScope : Swift.RawRepresentable {}
