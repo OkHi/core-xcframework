@@ -26,17 +26,19 @@ import _Concurrency
   @objc public var build: Swift.String?
   @objc deinit
 }
-@_inheritsConvenienceInitializers @objc public class OkHiUser : ObjectiveC.NSObject {
-  @objc public var phone: Swift.String
-  @objc public var firstName: Swift.String?
-  @objc public var lastName: Swift.String?
-  @objc public var id: Swift.String?
-  @objc override dynamic public init()
-  @objc public init(phoneNumber: Swift.String)
-  @objc public func with(firstName: Swift.String) -> OkCore.OkHiUser
-  @objc public func with(lastName: Swift.String) -> OkCore.OkHiUser
-  @objc public func with(okHiId: Swift.String) -> OkCore.OkHiUser
+public class OkHiUser : Swift.Codable {
+  public var phone: Swift.String
+  public var firstName: Swift.String?
+  public var lastName: Swift.String?
+  public var id: Swift.String?
+  public init()
+  public init(phoneNumber: Swift.String)
+  public func with(firstName: Swift.String) -> OkCore.OkHiUser
+  public func with(lastName: Swift.String) -> OkCore.OkHiUser
+  public func with(okHiId: Swift.String) -> OkCore.OkHiUser
   @objc deinit
+  public func encode(to encoder: Swift.Encoder) throws
+  required public init(from decoder: Swift.Decoder) throws
 }
 public class OkHiLocation : Swift.Codable {
   public var id: Swift.String?
