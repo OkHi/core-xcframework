@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.homepage              = 'https://docs.okhi.co'
   s.license               = { :type => 'MIT', :file => 'LICENSE' }
   s.author                = { 'OkHi' => 'kiano@okhi.co' }
-  s.source                = { :git => 'https://github.com/OkHi/core-xcframework.git', :tag => '1.4.6' }
+  s.source                = { :git => 'https://github.com/OkHi/core-xcframework.git', :tag => 'v' +  s.version.to_s }
   s.ios.deployment_target = '12.0'
   s.vendored_frameworks   = 'OkCore.xcframework'
 end
